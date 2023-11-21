@@ -2,7 +2,7 @@ from django.urls import path
 from .views import  (
     OrganizacionView, crear_usuario, ver_inventario,ver_usuario,editar_usuario,
     UserDelete,Searcher,Login,SignOut,crear_inventario,organizacion_delete,crear_ventas,
-    ventas_detalles,actualizar_cantidad,ventas_delete
+    ventas_detalles,actualizar_cantidad,ventas_delete,ventas_detalle
     )
 
 urlpatterns = [
@@ -28,5 +28,6 @@ urlpatterns = [
 
     path('Ventas/crear/',crear_ventas, name='crear_ventas'),
     path('Ventas/detalles/',ventas_detalles, name='ventas_detalles'),
+    path('Ventas/detalle/',ventas_detalle, name='ventas_detalles'),
     path('Ventas/delete/<int:id>',ventas_delete, name='ventas_delete'),
 ]

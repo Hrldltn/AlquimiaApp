@@ -343,13 +343,13 @@ def ventas_detalles(request):
     return render(request, 'Ventas/ventasCrear.html', data)
 
 
-# def ventas_detalles (request):
-#     ventas = DetallesVenta.objects.all()
+def ventas_detalle (request):
+    ventas = DetallesVenta.objects.all()
     
-#     data = {'ventas':ventas,
-#             'fechaHoy':fecha_actual
-#             }
-#     return render(request, 'Ventas/detallesVentas.html',data)
+    data = {'ventas':ventas,
+            'fechaHoy':fecha_actual
+            }
+    return render(request, 'Ventas/detallesVentas.html',data)
 
 def ventas_delete (request,id):
     platillo = Calendario.objects.get(id=id)
