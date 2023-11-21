@@ -13,14 +13,14 @@ import os
 from pathlib import Path
 import pymysql 
 from django.contrib.messages import constants as messages
-import dj_database_url
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # Assuming your settings.py is directly inside the 'AlquimiaApp' directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 STATIC_ROOT = BASE_DIR / 'static'
-TEMPLATES_DIRS = [BASE_DIR / 'Templates']
+TEMPLATES_DIRS = [BASE_DIR / 'Template']
 STATICFILES_DIRS = [
     BASE_DIR /'AlquimiaApp'/'static',
 ]
@@ -137,9 +137,6 @@ USE_I18N = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
