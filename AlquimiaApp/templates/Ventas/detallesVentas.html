@@ -68,7 +68,7 @@
                                             </thead>
                                             {% for venta in ventas %}
                                                 <tbody>
-                                                    <tr class="text-center {% if not user.is_administrador and not user.is_chef %}active-user{% endif %}">
+                                                    <tr class="text-center ">
                                                         <td>{{ venta.nombre_vendedor}}</td>
                                                         <td>{{ venta.productos}}</td>
                                                         <td>{{ venta.cantidad_vendida}}</td>
