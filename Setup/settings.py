@@ -20,10 +20,10 @@ from django.contrib.messages import constants as messages
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 STATIC_ROOT = BASE_DIR / 'static'
-TEMPLATES_DIRS = [BASE_DIR / 'Template']
 STATICFILES_DIRS = [
-    BASE_DIR /'AlquimiaApp'/'static',
+    BASE_DIR / 'AlquimiaApp' / 'static',
 ]
+
 
 pymysql.install_as_MySQLdb()
 SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
@@ -72,7 +72,7 @@ AUTH_USER_MODEL = 'AlquimiaApp.User'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'AlquimiaApp', 'Template')],
+        'DIRS': [BASE_DIR / 'AlquimiaApp' / 'Template'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
