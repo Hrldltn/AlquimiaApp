@@ -1,0 +1,137 @@
+body{
+    font-family: 'Playfair Display SC', serif;
+}
+.letter{
+    font-family:serif;
+}
+.button-30 {
+    align-items: center;
+    appearance: none;
+    background-color: #FCFCFD;
+    border-radius: 4px;
+    border-width: 0;
+    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
+    box-sizing: border-box;
+    color: #36395A;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: "JetBrains Mono",monospace;
+    height: 48px;
+    justify-content: center;
+    line-height: 1;
+    list-style: none;
+    overflow: hidden;
+    padding-left: 16px;
+    padding-right: 16px;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transition: box-shadow .15s,transform .15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    will-change: box-shadow,transform;
+    font-size: 18px;
+}
+
+.button-30:focus {
+     box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
+.button-30:hover {
+    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    transform: translateY(-2px);
+}
+
+.button-30:active {
+    box-shadow: #D6D6E7 0 3px 7px inset;
+    transform: translateY(2px);
+}
+.page-transition {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.page-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.BgColor{
+    background:linear-gradient(to top, rgb(243, 244, 246), rgb(209, 213, 219))
+
+}   
+
+.glass{
+    background: rgba(255, 255, 255, .4);
+    backdrop-filter: blur(10px);
+}
+.bgSpecial{
+    width: 30%;
+    height: 30%;
+    background:url( "{% static 'img/logo_marca_1.png' %}");
+}
+
+.btnNav{
+    height:50px;
+    cursor: pointer;
+    transition-duration: .6s;
+    
+}
+.btnNav:hover{
+    transform: translateY(-2px);
+    
+}
+.inactive-user {
+    transition: display 0.3s;
+}
+.custom-btn {
+    padding: 0.1rem 1rem; 
+    line-height: 1.0; 
+}
+
+.fc .fc-col-header-cell-cushion {
+    display: inline-block;
+    padding: 5px 4px;
+}
+.fc-dayGridMonth-button.fc-button.fc-button-primary {
+    background-color: #0d6efd !important;
+    margin-right:4px;
+    padding:6px;
+
+}
+.fc-timeGridWeek-button.fc-button.fc-button-primary {
+    background-color: #0d6efd !important;
+    margin-right:4px;
+    padding:6px;
+
+}
+.fc-timeGridDay-button.fc-button.fc-button-primary {
+    background-color: #0d6efd !important;
+    margin-right:4px;
+    padding:6px;
+
+}
+.fc-listWeek-button.fc-button.fc-button-primary {
+    background-color: #0d6efd !important;
+    margin-right:4px;
+    padding:6px;
+}
+.fc-prev-button.fc-button.fc-button-primary {
+    background-color: #0d6efd !important;
+    margin-right:4px;
+    padding:6px;
+}
+.fc-next-button.fc-button.fc-button-primary {
+    background-color: #0d6efd !important;
+    margin-right:4px;
+    padding:6px;
+}
+.fc-today-button.fc-button.fc-button-primary {
+    background-color: #0d6efd !important;
+    margin-right:4px;
+    padding:6px;
+}
+
