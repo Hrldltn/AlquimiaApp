@@ -247,10 +247,10 @@ def crear_inventario(request):
         else:
             form = InventarioForm()
     else:
-        return redirect('/')  # Redirect to the appropriate URL
+        return redirect('/') 
 
     data = {'form': form, 'title': 'Registrar nuevo platillo', 'button': 'Registrar', 'fechaHoy': fecha_actual}
-    return render(request, 'Bodega/Agregarinventario.html', data)
+    return render(request, 'Agregarinventario.html', data)
 
 def actualizar_cantidad(request, id):
     if request.method == 'POST':
