@@ -72,7 +72,7 @@ AUTH_USER_MODEL = 'AlquimiaApp.User'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'AlquimiaApp/Template')],
+        'DIRS': [os.path.join(BASE_DIR, 'AlquimiaApp', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
