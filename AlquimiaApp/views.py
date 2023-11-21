@@ -13,10 +13,7 @@ from .forms import CalendarioForm, CustomUserCreationForm, InventarioForm
 from AlquimiaApp.models import Calendario, DetallesVenta, Inventario, User, Venta 
 import sweetify
 from datetime import date
-from pathlib import Path
-import os
 
-BASE_DIR = Path(__file__).resolve().parent.parent
 fecha_actual = date.today()
 
 #inicio de sesion
@@ -251,8 +248,7 @@ def crear_inventario(request):
             form = InventarioForm()
     else:
         return redirect('/') 
-    template_path = BASE_DIR / 'AlquimiaApp' / 'templates' / 'Bodega' / 'Agregar_inventario.html'
-    print(f"Template path: {template_path}")
+ 
     data = {'form': form, 'title': 'Registrar nuevo platillo', 'button': 'Registrar', 'fechaHoy': fecha_actual}
     return render(request, 'Bodega/agregar_inventario.html', data)
 
