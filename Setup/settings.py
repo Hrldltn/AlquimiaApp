@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_ROOT = BASE_DIR / 'static'
 TEMPLATES_DIRS = [BASE_DIR / 'Templates']
 STATICFILES_DIRS = [
-    BASE_DIR / 'AlquimiaApp' / 'static',
+    BASE_DIR /'AlquimiaApp'/'static',
 ]
 
 pymysql.install_as_MySQLdb()
@@ -132,12 +132,21 @@ USE_TZ = True
 USE_I18N = True
 
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
