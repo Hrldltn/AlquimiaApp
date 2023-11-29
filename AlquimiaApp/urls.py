@@ -2,7 +2,7 @@ from django.urls import path
 from .views import  (
     OrganizacionView, crear_usuario, ver_inventario,ver_usuario,editar_usuario,
     UserDelete,Searcher,Login,SignOut,crear_inventario,organizacion_delete,crear_ventas,
-    ventas_detalles,actualizar_cantidad,ventas_delete,ventas_detalle
+    ventas_detalles,actualizar_cantidad,ventas_delete,ventas_detalle,cantidad_ventas,inventario_delete,ventas_detalle_delete
     )
 
 urlpatterns = [
@@ -23,11 +23,15 @@ urlpatterns = [
     path('Inventario/', ver_inventario,name='ver_inventario'),
     path('actualizar_cantidad/<int:id>/',actualizar_cantidad, name='actualizar_cantidad'),
     path('Inventario/crear/', crear_inventario,name='crear_inventario'),
+    path('Inventario/delete/<int:id>/', inventario_delete,name='inventario_delete'),
     
     #Ventas
-
     path('Ventas/crear/',crear_ventas, name='crear_ventas'),
-    path('Ventas/detalles/',ventas_detalles, name='ventas_detalles'),
-    path('Ventas/detalle/',ventas_detalle, name='ventas_detalles'),
+    path('cantidad_ventas/<int:id>',cantidad_ventas, name='cantidad_ventas'),
     path('Ventas/delete/<int:id>',ventas_delete, name='ventas_delete'),
+    
+    # Ventas detalles
+    path('Ventas/detalles/',ventas_detalles, name='ventas_detalles'),
+    path('Ventas/detalle/',ventas_detalle, name='ventas_detalle'),
+    path('Ventas/detalle/delete/<int:id>',ventas_detalle_delete, name='ventas_detalle_delete'),
 ]

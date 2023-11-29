@@ -28,8 +28,17 @@ class InventarioForm(forms.ModelForm):
         
 
 class CalendarioForm(forms.ModelForm):
-    start_time = forms.DateTimeField(label="Fecha de inicio", required=True, widget=forms.NumberInput(attrs={'type': 'date'}))
-    end_time = forms.DateTimeField(label="Fecha de termino", required=True, widget=forms.NumberInput(attrs={'type': 'date'}))
+    start_time = forms.DateTimeField(
+        label="Fecha de inicio",
+        required=True,
+        widget=forms.NumberInput(attrs={'type': 'date', 'name': 'start_time', 'id': 'start_time_input'}),
+    )
+    end_time = forms.DateTimeField(
+        label="Fecha de termino",
+        required=True,
+        widget=forms.NumberInput(attrs={'type': 'date'}),
+    )
+
     class Meta:
         model = Calendario
-        fields = ('nombre','productos','start_time','end_time','Porciones')
+        fields = ('nombre', 'productos', 'start_time', 'end_time', 'Porciones')

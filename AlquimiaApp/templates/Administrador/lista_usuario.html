@@ -95,6 +95,7 @@
                         <table id="example1" class="shadow table m-3 my-5 py-2 text-center table-responsive-lg table-border table-hover table-striped">
                             <thead>
                                 <tr class="text-black">
+                                    <th>Nº</th>
                                     <th>Nombre</th>
                                     <th>Apellidos</th>
                                     <th>Fecha de ingreso</th>
@@ -110,6 +111,7 @@
                             {% for user in users %}
                                 <tbody>
                                     <tr class="text-center {% if not user.is_administrador and not user.is_chef %}active-user{% endif %}">
+                                        <td class="fw-bold">{{ forloop.counter }}</td>
                                         <td>{{ user.first_name}}</td>
                                         <td>{{ user.last_name}}</td>
                                         <td>{{ user.date_joined}}</td>

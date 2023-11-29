@@ -31,7 +31,7 @@ OPTIONS=(
 )
 
 class Calendario(models.Model):
-    nombre=models.ForeignKey(User, on_delete=models.CASCADE)
+    nombre=models.ForeignKey(User,verbose_name="Encargado", on_delete=models.CASCADE)
     productos = models.ForeignKey(Inventario, on_delete=models.CASCADE)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()

@@ -92,17 +92,25 @@ WSGI_APPLICATION = 'Setup.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'alquimiadb',
-        'USER': 'alquimiadb_user',
-        'PASSWORD': '0RNTXnLredN7fLUBtiDcaJSz8CRZ1RI1',
-        'HOST': 'dpg-cldvsimf27hc738ovcg0-a.oregon-postgres.render.com',  
-        'PORT': '5432',  
+        'USER': 'root',
+        'PASSWORD': '',
     }
 }
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'alquimiadb',
+#         'USER': 'alquimiadb_user',
+#         'PASSWORD': '0RNTXnLredN7fLUBtiDcaJSz8CRZ1RI1',
+#         'HOST': 'dpg-cldvsimf27hc738ovcg0-a.oregon-postgres.render.com',  
+#         'PORT': '5432',  
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
