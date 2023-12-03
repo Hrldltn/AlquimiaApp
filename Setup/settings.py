@@ -103,6 +103,15 @@ DATABASES = {
         'PORT': '5432',  
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'alquimiadb',
+#         'USER':'root',
+#         'PASSWORD':''
+#     }
+# }
+
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
