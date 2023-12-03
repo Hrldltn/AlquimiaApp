@@ -46,6 +46,7 @@ def SignOut(request):
 
 #usuarios
 
+
 def crear_usuario(request):
 # if request.user.is_authenticated:
     if request.method == 'POST':
@@ -83,16 +84,7 @@ def ver_usuario(request):
     else:
         return redirect('/')
     
-def Searcher(request):
-    if request.user.is_authenticated:
-        search = request.GET['busemp']
-        users = User.objects.filter(Q(first_name__icontains=search) | Q(last_name__icontains=search) 
-                                | Q(date_joined__icontains=search) | Q(username__icontains=search)
-                                | Q(is_administrador__icontains=search) | Q(is_chef__icontains=search))
-        data={'users':users}
-        return render(request, 'Administrador/lista_usuario.html',data)
-    else:
-        return redirect('/')
+
   
 def editar_usuario(request, id):
     if request.user.is_administrador:
@@ -207,11 +199,14 @@ def organizacion_delete(request, id):
     if request.user.is_authenticated:
         event = Calendario.objects.get(id=id)
         Nombre = event.productos
-        inventario_Platillo = Inventario.objects.get(nombre=Nombre)
+        insumo_id = event.productos.id
+        inventario_Platillo = Inventario.objects.get(id=insumo_id)
         try:
+            inventario_Platillo.porciones_disponibles  += event.Porciones
+            inventario_Platillo.save()
             event.delete()
-            
             sweetify.success(request,f'Evento eliminado exitosamente!')
+
         except:
             sweetify.error(request, f'El evento no se pudo desactivar') 
         return redirect('../../Organizacion/')
@@ -220,8 +215,6 @@ def organizacion_delete(request, id):
 
 
 #Inventario
-
-
 def crear_inventario(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -262,6 +255,7 @@ def crear_inventario(request):
     return render(request, 'Bodega/agregar_inventario.html', data)
 
 
+
 def actualizar_cantidad(request, id):
     if request.method == 'POST':
         insumo = Inventario.objects.get(id=id)
@@ -300,7 +294,26 @@ def ver_inventario(request):
         return render(request, 'Bodega/listaInsumo.html',data)
     else:
         return redirect('/')    
-    
+
+def editar_bodega(request,id):
+    if request.user.is_administrador:
+        insumo = Inventario.objects.get(id=id)
+        form = InventarioForm(instance=insumo)
+        if request.method == 'POST':
+            form = InventarioForm(request.POST, instance=insumo)
+            try:
+                form.save()
+                nombre = form.cleaned_data['nombre']
+                sweetify.success(request, f'El platillo {nombre} ha sido actualizado correctamente')
+                return redirect('../../')
+            except Exception as e:
+                sweetify.error(request, f'El platillo no se pudo actualizar: {str(e)}')
+        data = {'form': form, 'title': 'Actualizar insumo', 'button': 'actualizar','fechaHoy':fecha_actual}
+        return render(request, 'Bodega/agregar_inventario.html', data)
+    else:
+        sweetify.error(request, f'Usuario incorrecto')
+    return redirect('/')
+      
 def inventario_delete(request, id):
     if request.user.is_authenticated:
         insumo = Inventario.objects.get(id=id)
@@ -317,10 +330,8 @@ def inventario_delete(request, id):
 #Ventas
 
 def cantidad_ventas(request, id):
-    print("fuera de post")
+
     if request.method == 'POST':
-        print("dentro del post")
-        print(id)
         evento = Calendario.objects.get(id=id)
         accion = request.POST.get('accion')
         if accion == 'restar':
@@ -333,7 +344,7 @@ def cantidad_ventas(request, id):
 
 def crear_ventas (request):
     events = Calendario.objects.all()
-    data = {'events':events}
+    data = {'events':events,'fechaHoy':fecha_actual}
     return render(request, 'Ventas/ventasCrear.html',data)
 
 def ventas_delete (request,id):
@@ -386,7 +397,7 @@ def ventas_detalles(request):
 
         return redirect("../../Ventas/crear/")
 
-    data = {'ventas': ventas}
+    data = {'ventas': ventas,'fechaHoy':fecha_actual}
     return render(request, 'Ventas/ventasCrear.html', data)
 
 
@@ -404,7 +415,6 @@ def ventas_detalle(request):
     detalles_hoy = [] 
     
     if request.method == 'POST':
-        print("aqui entro")
         fecha_str = request.POST.get('fecha')
         try:
             fecha = datetime.strptime(fecha_str, '%Y-%m-%d')
@@ -447,7 +457,7 @@ def ventas_detalle(request):
     data = {
         'ventas': detalles_ventas, 'fechaHoy': fecha_actual_hoy, 'detalles_hoy': detalles_hoy,
         'nombre_producto': nombre_producto, 'impuesto': impuesto, 'detalles_agrupados': detalles_agrupados,
-        'total': total, 'fecha': fecha, 'total_precio': total_precio, 'total_adicional': total_adicional,
+        'total': total, 'fechaHoy':fecha_actual, 'total_precio': total_precio, 'total_adicional': total_adicional,
         'TotalDetalles': TotalDetalles
     }
 
@@ -457,6 +467,10 @@ def ventas_detalle(request):
 
 def ventas_detalle_delete (request,id):
     detalles = DetallesVenta.objects.get(id=id)
+    venta=detalles.venta
+    calendario=detalles.calendario
+    venta.delete()
+    calendario.delete()
     detalles.delete()
-
+    sweetify.success(request, f'El registró se elimino correctamente')
     return redirect("../../../Ventas/detalle/")
