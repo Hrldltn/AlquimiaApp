@@ -41,7 +41,7 @@ SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
 SECRET_KEY = 'django-insecure-0l_^1v&sgdkbljld^7_70sid!@1)s0^b@rht6a93sczo&=_w5v'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
