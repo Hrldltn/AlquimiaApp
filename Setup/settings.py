@@ -15,19 +15,21 @@ import pymysql
 from django.contrib.messages import constants as messages
 
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-# Assuming your settings.py is directly inside the 'AlquimiaApp' directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static') 
 STATICFILES_DIRS = [
-    BASE_DIR / 'AlquimiaApp' / 'static',
+    BASE_DIR / 'AlquimiaApp' / 'static', 
 ]
 
-STATIC_URL = '/AlquimiaApp/static/'
+STATIC_URL = '/static/'  
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'  
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
+
+
+
+
 
 pymysql.install_as_MySQLdb()
 SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
