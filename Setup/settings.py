@@ -149,7 +149,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'AlquimiaApp' / 'static',
 ]
 
-STATIC_URL = '/static/'
+STATIC_URL = '/AlquimiaApp/static/'
 STATICFILES_DIRS = [BASE_DIR / 'AlquimiaApp' / 'static',]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
