@@ -19,10 +19,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static') 
 STATICFILES_DIRS = [
-    BASE_DIR / 'AlquimiaApp' / 'static', 
+    BASE_DIR / 'Alquimia' / 'static', 
 ]
 
-STATIC_URL = '/static/'  
+STATIC_URL = 'Alquimia/static/'  
 
 MEDIA_URL = '/media/'  
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
