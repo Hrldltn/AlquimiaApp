@@ -35,7 +35,7 @@ SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
 SECRET_KEY = 'django-insecure-0l_^1v&sgdkbljld^7_70sid!@1)s0^b@rht6a93sczo&=_w5v'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -144,7 +144,12 @@ USE_I18N = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = 'AquimiaApp/static/'
+STATIC_ROOT = BASE_DIR / 'static'
+STATICFILES_DIRS = [
+    BASE_DIR / 'AlquimiaApp' / 'static',
+]
+
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'AlquimiaApp' / 'static',]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
