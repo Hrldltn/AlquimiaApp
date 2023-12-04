@@ -39,16 +39,15 @@
 
     <body>
         {% if user.is_authenticated %}
-        <div class="d-flex fixed mb-3  w-100 bg-secondary justify-content-between align-items-center">
-            <div class="p-1 my-container active-cont">
-                <a id="toggleNav" class="m-2 mt-3 btn border border-light">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-list"
-                        viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
-                    </svg>
-                </a>
+        <div class="d-flex fixed py-1 w-100 bg-secondary justify-content-between align-items-center">
+            <div class="py-2 w-25 d-flex justify-content-end my-container active-cont">
+                <button id="toggleNav" type="button" class="hamburger animated fadeInLeft is-closed" data-toggle="offcanvas">
+                    <span class="hamb-top"></span>
+                    <span class="hamb-middle"></span>
+                    <span class="hamb-bottom"></span>
+                </button>
             </div>
+           
             <p class="fw-bolder px-4 h6 text-warning">
                 web app Alquimia
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="mx-3 bi bi-shop-window text-warning" viewBox="0 0 16 16">
@@ -57,102 +56,104 @@
             </p>
         </div>
         <main class="d-flex flex-row bg-white ">
-            <div class="container-fluid object-fit pt-3 mt-5">
-                <div class="row flex-nowrap justify-content-center">
-                    <nav class=" bg-secondary p-0 col-auto col-md-4 col-lg-2 min-vh-100 d-block" id="sideNav">
-                        <div class="d-flex flex-row  gap-3 align-items-center"> 
-                            <div class="circle p-0 mb-4">
-                                <img  src="{% static '/img/logo_marca_1.png' %}" class="img-fluid img-responsive rounded w-30 h-30 mx-auto d-block" />
-                            
-                                <div class="rounded mx-4 w-100 py-2  px-4 bg-white letter ">
-                                    <h1 class="h5 text-black fw-bold  border-bottom  pb-2"> 
-                                        <span class=" text-black fw-bold h6 ">USUARIO:</span >
-                                        <span class=" text-secondary  text-capitalize  h6 ">{{user.first_name}} {{user.last_name}}.</span >
-                                    </h1>
-                                    <h1 class="h5 text-light "> 
-                                        <span class=" text-black fw-bold  fw-bolder h6 ">TIPO:
+            <div class="container-fluid object-fit pt-1">
+                <div class="row  flex-nowrap justify-content-center">
+                    <div class="d-flex flex-column align-content-end col-lg-2 h-auto">
+                        <nav class="fixed bg-secondary px-3 object-fit col-auto col-md-4 col-lg-2  min-vh-100 no-show " id="sideNav">
+                            <div class="d-flex flex-row  gap-3 align-items-center"> 
+                                <div class="circle p-0 mb-4">
+                                    <img  src="{% static '/img/logo_marca_1.png' %}" class="img-fluid img-responsive rounded w-30 h-30 mx-auto d-block" />
+                                
+                                    <div class="rounded mx-4 w-100 py-2  px-4 bg-white letter ">
+                                        <h1 class="h5 text-black fw-bold  border-bottom border-danger border-2 pb-2"> 
+                                            <span class=" text-black fw-bold h6 ">USUARIO:</span >
+                                            <span class=" text-secondary fw-bold text-capitalize  h6 ">{{user.first_name}} {{user.last_name}}.</span >
+                                        </h1>
+                                        <h1 class="h5 text-light "> 
+                                            <span class=" text-black fw-bold   h6 ">TIPO:
+                                            </span>
+                                            <span class=" text-secondary text-capitalize fw-bold h6 ">
+                                            {% if user.is_administrador and user.is_chef %} 
+                                                Administrador-Chef.
+                                            {% elif user.is_administrador %}
+                                            Administrador.
+                                            {% else %}
+                                            Chef.
+                                            {% endif %}
                                         </span>
-                                        <span class=" text-secondary text-capitalize fw-bolder h6 ">
-                                        {% if user.is_administrador and user.is_chef %} 
-                                            Administrador-Chef.
-                                        {% elif user.is_administrador %}
-                                        Administrador.
-                                        {% else %}
-                                        Chef.
-                                        {% endif %}
-                                    </span>
-                                </h1>
+                                    </h1>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <p class="m-3 h6 px-2 fw-bold text-light">Navegación</p>
-                        <hr>
-                        <ul class="nav nav-pills flex-column gap-3 py-2 px-4 ">
-                            <li class="nav-item box ">
-                                <a href="../../../Ventas/detalle/" class="nav-link button-30  border-bottom border-3  text-black icon-link icon-link-hover d-flex flex-row align-items-center gap-3"  aria-current="page">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-cash-stack" viewBox="0 0 16 16">
-                                        <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1H1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
-                                        <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V5zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2H3z"/>
-                                    </svg>
-                                    <span class="fs-5 d-none d-sm-inline fw-bolder">Ventas</span>
-                                </a>
-                            </li>
-                            <li class="nav-item   ">
-                                <a href="../../../Organizacion/" class="nav-link button-30   border-bottom border-3  text-black d-flex flex-row align-items-center gap-3" aria-current="page">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
-                                        <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
-                                        <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                                    </svg>
-                                    <span class="fs-5 d-none d-sm-inline fw-bolder">Organizacion</span>
-                                </a>
-                            </li>
-                            <li class="nav-item " >
-                                <a href="../../../Inventario/" class="nav-link text-black button-30   border-bottom border-3  d-flex flex-row align-items-center gap-3" aria-current="page">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-lock-fill" viewBox="0 0 16 16">
-                                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
-                                        <path d="m8 3.293 4.72 4.72a3 3 0 0 0-2.709 3.248A2 2 0 0 0 9 13v2H3.5A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
-                                        <path d="M13 9a2 2 0 0 0-2 2v1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1v-1a2 2 0 0 0-2-2Zm0 1a1 1 0 0 1 1 1v1h-2v-1a1 1 0 0 1 1-1Z"/>
-                                    </svg>
-                                    <span class="fs-5  d-none d-sm-inline fw-bolder">Bodega</span>
-                                </a>
-                            </li>
-                            <li class="nav-item   ">
-                                <a href="../../../usuarios/lista/" class="nav-link button-30   border-bottom border-3  text-black icon-link icon-link-hover d-flex flex-row align-items-center gap-3"  aria-current="page">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
-                                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
-                                    </svg>
-                                    <span class="fs-5 d-none d-sm-inline fw-bolder">Usuarios</span>
-                                </a>
-                            </li>
-                            <li class="nav-item   ">
-                                    <a href="#" class="nav-link button-30   border-bottom border-3  text-black d-flex flex-row align-items-center gap-3" aria-current="page">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-graph-up" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"/>
+                            
+                            <p class="m-3 h6 px-2 fw-bold text-light">Navegación</p>
+                            <hr>
+                            <ul class="nav nav-pills flex-column gap-3 py-2 px-4 ">
+                                <li class="nav-item box ">
+                                    <a href="../../../Ventas/detalle/" class="nav-link button-30  border-bottom border-3 border-danger  text-black icon-link icon-link-hover d-flex flex-row align-items-center gap-3"  aria-current="page">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-cash-stack" viewBox="0 0 16 16">
+                                            <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1H1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                                            <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V5zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2H3z"/>
                                         </svg>
-                                        <span class="fs-5 d-none d-sm-inline fw-bolder">Estadisticas</span>
+                                        <span class="fs-5 d-none d-sm-inline fw-bolder">Ventas</span>
                                     </a>
                                 </li>
-                            <li class="nav-item mt-5"> 
-                                <a href="../../../logout" class="nav-link mb-3 button-30 text-black icon-link icon-link-hover d-flex flex-row align-items-center gap-3"  aria-current="page">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-gear-wide-connected" viewBox="0 0 16 16">
-                                        <path d="M7.068.727c.243-.97 1.62-.97 1.864 0l.071.286a.96.96 0 0 0 1.622.434l.205-.211c.695-.719 1.888-.03 1.613.931l-.08.284a.96.96 0 0 0 1.187 1.187l.283-.081c.96-.275 1.65.918.931 1.613l-.211.205a.96.96 0 0 0 .434 1.622l.286.071c.97.243.97 1.62 0 1.864l-.286.071a.96.96 0 0 0-.434 1.622l.211.205c.719.695.03 1.888-.931 1.613l-.284-.08a.96.96 0 0 0-1.187 1.187l.081.283c.275.96-.918 1.65-1.613.931l-.205-.211a.96.96 0 0 0-1.622.434l-.071.286c-.243.97-1.62.97-1.864 0l-.071-.286a.96.96 0 0 0-1.622-.434l-.205.211c-.695.719-1.888.03-1.613-.931l.08-.284a.96.96 0 0 0-1.186-1.187l-.284.081c-.96.275-1.65-.918-.931-1.613l.211-.205a.96.96 0 0 0-.434-1.622l-.286-.071c-.97-.243-.97-1.62 0-1.864l.286-.071a.96.96 0 0 0 .434-1.622l-.211-.205c-.719-.695-.03-1.888.931-1.613l.284.08a.96.96 0 0 0 1.187-1.186l-.081-.284c-.275-.96.918-1.65 1.613-.931l.205.211a.96.96 0 0 0 1.622-.434l.071-.286zM12.973 8.5H8.25l-2.834 3.779A4.998 4.998 0 0 0 12.973 8.5zm0-1a4.998 4.998 0 0 0-7.557-3.779l2.834 3.78h4.723zM5.048 3.967c-.03.021-.058.043-.087.065l.087-.065zm-.431.355A4.984 4.984 0 0 0 3.002 8c0 1.455.622 2.765 1.615 3.678L7.375 8 4.617 4.322zm.344 7.646.087.065-.087-.065z"/>
-                                    </svg>
-                                    <span class="fs-5 d-none d-sm-inline  fw-bolder">Configuración</span>
-                                </a>
-                                <a href="../../../logout" class="nav-link button-30 text-black icon-link icon-link-hover d-flex flex-row align-items-center gap-3"  aria-current="page">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-escape" viewBox="0 0 16 16">
-                                        <path d="M8.538 1.02a.5.5 0 1 0-.076.998 6 6 0 1 1-6.445 6.444.5.5 0 0 0-.997.076A7 7 0 1 0 8.538 1.02Z"/>
-                                        <path d="M7.096 7.828a.5.5 0 0 0 .707-.707L2.707 2.025h2.768a.5.5 0 1 0 0-1H1.5a.5.5 0 0 0-.5.5V5.5a.5.5 0 0 0 1 0V2.732l5.096 5.096Z"/>
-                                    </svg>
-                                    <span class="fs-5 d-none d-sm-inline  fw-bolder">Cerrar sesión</span>
-                                </a>
-                            </li>
-                        </ul>
+                                <li class="nav-item   ">
+                                    <a href="../../../Organizacion/" class="nav-link button-30   border-bottom border-3 border-danger text-black d-flex flex-row align-items-center gap-3" aria-current="page">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+                                            <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                                            <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                        </svg>
+                                        <span class="fs-5 d-none d-sm-inline fw-bolder">Organizacion</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item " >
+                                    <a href="../../../Inventario/" class="nav-link text-black button-30   border-bottom border-danger border-3  d-flex flex-row align-items-center gap-3" aria-current="page">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-lock-fill" viewBox="0 0 16 16">
+                                            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
+                                            <path d="m8 3.293 4.72 4.72a3 3 0 0 0-2.709 3.248A2 2 0 0 0 9 13v2H3.5A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
+                                            <path d="M13 9a2 2 0 0 0-2 2v1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1v-1a2 2 0 0 0-2-2Zm0 1a1 1 0 0 1 1 1v1h-2v-1a1 1 0 0 1 1-1Z"/>
+                                        </svg>
+                                        <span class="fs-5  d-none d-sm-inline fw-bolder">Bodega</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item   ">
+                                    <a href="../../../usuarios/lista/" class="nav-link button-30   border-bottom border-3 border-danger text-black icon-link icon-link-hover d-flex flex-row align-items-center gap-3"  aria-current="page">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                                            <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
+                                        </svg>
+                                        <span class="fs-5 d-none d-sm-inline fw-bolder">Usuarios</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item   ">
+                                        <a href="#" class="nav-link button-30   border-bottom border-3  text-black d-flex border-danger flex-row align-items-center gap-3" aria-current="page">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-graph-up" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"/>
+                                            </svg>
+                                            <span class="fs-5 d-none d-sm-inline fw-bolder">Estadisticas</span>
+                                        </a>
+                                    </li>
+                                <li class="nav-item mt-5"> 
+                                    <a href="../../../logout" class="nav-link mb-3 button-30 text-black icon-link icon-link-hover  d-flex flex-row align-items-center gap-3"  aria-current="page">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-gear-wide-connected" viewBox="0 0 16 16">
+                                            <path d="M7.068.727c.243-.97 1.62-.97 1.864 0l.071.286a.96.96 0 0 0 1.622.434l.205-.211c.695-.719 1.888-.03 1.613.931l-.08.284a.96.96 0 0 0 1.187 1.187l.283-.081c.96-.275 1.65.918.931 1.613l-.211.205a.96.96 0 0 0 .434 1.622l.286.071c.97.243.97 1.62 0 1.864l-.286.071a.96.96 0 0 0-.434 1.622l.211.205c.719.695.03 1.888-.931 1.613l-.284-.08a.96.96 0 0 0-1.187 1.187l.081.283c.275.96-.918 1.65-1.613.931l-.205-.211a.96.96 0 0 0-1.622.434l-.071.286c-.243.97-1.62.97-1.864 0l-.071-.286a.96.96 0 0 0-1.622-.434l-.205.211c-.695.719-1.888.03-1.613-.931l.08-.284a.96.96 0 0 0-1.186-1.187l-.284.081c-.96.275-1.65-.918-.931-1.613l.211-.205a.96.96 0 0 0-.434-1.622l-.286-.071c-.97-.243-.97-1.62 0-1.864l.286-.071a.96.96 0 0 0 .434-1.622l-.211-.205c-.719-.695-.03-1.888.931-1.613l.284.08a.96.96 0 0 0 1.187-1.186l-.081-.284c-.275-.96.918-1.65 1.613-.931l.205.211a.96.96 0 0 0 1.622-.434l.071-.286zM12.973 8.5H8.25l-2.834 3.779A4.998 4.998 0 0 0 12.973 8.5zm0-1a4.998 4.998 0 0 0-7.557-3.779l2.834 3.78h4.723zM5.048 3.967c-.03.021-.058.043-.087.065l.087-.065zm-.431.355A4.984 4.984 0 0 0 3.002 8c0 1.455.622 2.765 1.615 3.678L7.375 8 4.617 4.322zm.344 7.646.087.065-.087-.065z"/>
+                                        </svg>
+                                        <span class="fs-5 d-none d-sm-inline  fw-bolder">Configuración</span>
+                                    </a>
+                                    <a href="../../../logout" class="nav-link button-30 text-black icon-link icon-link-hover d-flex flex-row align-items-center gap-3"  aria-current="page">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-escape" viewBox="0 0 16 16">
+                                            <path d="M8.538 1.02a.5.5 0 1 0-.076.998 6 6 0 1 1-6.445 6.444.5.5 0 0 0-.997.076A7 7 0 1 0 8.538 1.02Z"/>
+                                            <path d="M7.096 7.828a.5.5 0 0 0 .707-.707L2.707 2.025h2.768a.5.5 0 1 0 0-1H1.5a.5.5 0 0 0-.5.5V5.5a.5.5 0 0 0 1 0V2.732l5.096 5.096Z"/>
+                                        </svg>
+                                        <span class="fs-5 d-none d-sm-inline  fw-bolder">Cerrar sesión</span>
+                                    </a>
+                                </li>
+                            </ul>
 
-                        
-                    </nav>
-                    <div class="page-transition d-flex flex-column object-fit justify-content-center col-xl-10">
+                            
+                        </nav>
+                    </div>
+                    <div class="page-transition d-flex flex-column object-fit justify-content-center col-xl-10 col-md-12 mt-5 rounded">
                 
                         {% block content %}
                         {% endblock %} 
@@ -254,12 +255,48 @@
     </script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+        $(document).ready(function () {
+            var trigger = $('.hamburger'),
+            overlay = $('.overlay'),
+               isClosed = false;
+          
+              trigger.click(function () {
+                hamburger_cross();      
+              });
+          
+              function hamburger_cross() {
+          
+                if (isClosed == true) {          
+                  overlay.hide();
+                  trigger.removeClass('is-open');
+                  trigger.addClass('is-closed');
+                  isClosed = false;
+                } else {   
+                  overlay.show();
+                  trigger.removeClass('is-closed');
+                  trigger.addClass('is-open');
+                  isClosed = true;
+                }
+            }
+            
+            $('[data-toggle="offcanvas"]').click(function () {
+                  $('#wrapper').toggleClass('toggled');
+            });  
+          });
         document.getElementById('toggleNav').addEventListener('click', function () {
             const sideNav = document.getElementById('sideNav');
-            sideNav.classList.toggle('d-md-none');
-            sideNav.classList.toggle('hide-nav');
+            console.log(sideNav);
+        
+            if (sideNav.classList.contains('no-show')) {
+                sideNav.classList.remove('no-show');
+                sideNav.classList.add('show-nav');
+            } else {
+                sideNav.classList.add('no-show');
+                sideNav.classList.remove('show-nav');
+            }
         });
-    });
+    })
+
 </script>
 
     

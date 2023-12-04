@@ -3,7 +3,7 @@ from .views import  (
     OrganizacionView, crear_usuario, ver_inventario,ver_usuario,editar_usuario,
     UserDelete,Login,SignOut,crear_inventario,organizacion_delete,crear_ventas,
     ventas_detalles,actualizar_cantidad,ventas_delete,ventas_detalle,cantidad_ventas,inventario_delete,ventas_detalle_delete,
-    editar_bodega,
+    editar_bodega,configuracion_user
     )
 
 urlpatterns = [
@@ -11,6 +11,7 @@ urlpatterns = [
     path('', Login , name='Inicio'),
     path('usuarios/crear/', crear_usuario, name='crear_usuario'),
     path('usuarios/lista/', ver_usuario , name='ver_usuario'),
+    path('usuarios/configuracion/', configuracion_user , name='configuracion_user'),
     path('editar/<int:id>',editar_usuario,name='editar'),
     path('UserDelete/<int:id>',UserDelete,name='userDelete'),
     path('logout/',SignOut, name='logout'),

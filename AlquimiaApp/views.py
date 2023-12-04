@@ -39,6 +39,25 @@ def Login(request):
     data = {'form' : form , 'title':'Iniciar Sesión'}
     return render(request, 'Home.html',data)  
 
+def configuracion_user(request):
+    if request.user.is_authenticated:
+        user_id=request.user.id
+        user = User.objects.get(id=user_id)
+        form = CustomUserCreationForm(instance=user)
+        if request.method == 'POST':
+            form = CustomUserCreationForm(request.POST, instance=user)
+            try:
+                form.save()
+                first_name = form.cleaned_data['first_name']
+                sweetify.success(request, f'Usuario {first_name} ha sido actualizado correctamente')
+                return redirect('../usuarios/lista/')
+            except Exception as e:
+                sweetify.error(request, f'El usuario no se pudo actualizar: {str(e)}')
+        data = {'form': form, 'title': 'Configuración de usuario', 'button': 'actualizar','fechaHoy':fecha_actual}
+        return render(request, 'Administrador/crear_usuario.html', data)
+    else:
+        sweetify.error(request, f'Usuario incorrecto')
+    return redirect('/')
 
 def SignOut(request):
     logout(request)
