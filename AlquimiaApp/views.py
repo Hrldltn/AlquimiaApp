@@ -472,7 +472,7 @@ def ventas_detalle(request):
 
     for nombre_producto, detalles_agrupados_producto in detalles_agrupados.items():
         total += detalles_agrupados_producto['total_precio_impuesto']
-        total_precio += detalles_agrupados_producto['total_precio']
+        total_precio += detalles_agrupados_producto['total_precio_impuesto']
         total_adicional += detalles_agrupados_producto['total_por_impuesto']
         
     data = {
