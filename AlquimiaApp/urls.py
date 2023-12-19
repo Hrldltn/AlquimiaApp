@@ -41,4 +41,5 @@ urlpatterns = [
     # ORGANIZACIÓN
     path('Estadistica/', EstadisticaView.as_view(), name='estadistica_view'),
     
+    
 ]
