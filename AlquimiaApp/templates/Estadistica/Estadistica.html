@@ -45,69 +45,11 @@
                     <div class="row justify-content-evenly px-5 ">
                         <div class="shadow p-5 bg-light align-content-center  gap-2 justify-content-between row">
                             <p class="py-3">Información de bodega y registros</p>
-                            <div class="card shadow p-0 col-md-12 col-xl-5 mx-4">
-                                <div class="card-header d-flex bg-primary flex-row align-items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="mx-3 text-white bi bi-record-circle" viewBox="0 0 16 16">
-                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                        <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                                    </svg>
-                                    <h6 class="card-title pt-2 text-white">Platillos</h6>
-                                </div>
-                                <div class="card-body bg-light pt-3">
-                                    <div class="d-flex flex-row align-items-center  mt-2 px-2">
-                                        <h6 class="card-title text-secondary pb-1">Disponibles en bodega:</h6>
-                                        <p class="card-text  fw-bold px-2 "> {{porcionesTotal}}</p>
-                                        <p class="spinner-grow p-0 mx-1 pb-1 {% if porcionesTotal <= 2 %} bg-danger {% elif porcionesTotal > 2 %} bg-success{% endif %}"></p>
-                                    </div><hr>
-                                    <div class="d-flex flex-row align-items-center mb-3 px-2">
-                                        <h6 class="card-title text-secondary mb-1">Platillos consumidos hoy:</h6>
-                                        <p class="card-text  fw-bold px-2 pb-2"> {{porcionesUtilizadasTotal|floatformat:0}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        <br>
-                            <div class="card shadow p-0 col-md-12 col-xl-5 mx-4">
-                                <div class="card-header bg-primary d-flex flex-row align-items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="mx-3 text-white bi bi-card-checklist" viewBox="0 0 16 16">
-                                        <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-                                        <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
-                                    </svg>
-                                    <h6 class="card-title pt-2 text-white">Ventas</h6>
-                                </div>
-                                <div class="card-body ">
-                                    <div class="d-flex flex-row  align-items-center  mt-2 px-2">
-                                        <h6 class="card-title text-secondary mb-1">Total:</h6>
-                                        <p class="card-text  fw-bold px-2 mb-0">$ {{ total_ventas_totales|floatformat:0  }}</p>
-                                        <p class="spinner-grow p-0 mx-1 {% if registrosHoy == 0 %} bg-danger {% elif registrosHoy > 0 %} bg-success{% endif %}"></p>
-                                    </div><hr>
-                                    <div class="d-flex flex-row align-content-center align-items-center   px-2">
-                                        <h6 class="card-title text-secondary mb-1">Total hoy:</h6>
-                                        <p class="card-text  fw-bold px-2 mb-0"> ${{ total_ventas_hoy|floatformat:0 }}</p>
-                                    </div>
-                                </div>
-                            </div>
+                            
+                     
+                            
                             <br>
-                            <div class="card shadow p-0 col-md-12 col-xl-5 mx-4">
-                                <div class="card-header bg-primary d-flex flex-row align-items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="mx-3 text-white bi bi-card-checklist" viewBox="0 0 16 16">
-                                        <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>                                    </svg>
-                                    <h6 class="card-title pt-2 text-white">Usuarios Activos</h6>
-                                </div>
-                            <div class="card-body ">
-                                <div class="d-flex flex-row  align-items-center  mt-2 px-2">
-                                    <h6 class="card-title text-secondary mb-1">Activos:</h6>
-                                    <p class="card-text  fw-bold px-2 mb-0"> {{ cantidad_usuarios_activos }}</p>
-                                    <p class="spinner-grow p-0 mx-1 {% if registrosHoy == 0 %} bg-danger {% elif registrosHoy > 0 %} bg-success{% endif %}"></p>
-                                </div><hr>
-                                <div class="d-flex flex-row align-content-center align-items-center   px-2">
-                                    <h6 class="card-title text-secondary mb-1">Inactivos:</h6>
-                                    <p class="card-text  fw-bold px-2 mb-0">  {{ cantidad_usuarios_inactivos }}</p>
-                                </div><hr>
-                                <div class="d-flex flex-row align-content-center align-items-center  mb-2 px-2">
-                                    <h6 class="card-title text-secondary mb-1">Registros totales:</h6>
-                                    <p class="card-text  fw-bolder px-2 pb-2">{{ cantidad_usuarios_totales }}</p>
-                                </div>
-                            </div>
+                      
                         </div>
 
                         <section>
