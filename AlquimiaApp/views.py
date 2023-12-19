@@ -261,12 +261,12 @@ def crear_inventario(request):
                         inventario_Platillo.porciones_disponibles = cantidad_Total
                         inventario_Platillo.save()
 
-                    sweetify.success(request, f'El insumo {nombre_Platillo} se registró correctamente')
+                    sweetify.success(request, f'El platillo {nombre_Platillo} se registró correctamente')
                     form = InventarioForm()
                     return redirect("../../Inventario/")
                 
                 except Exception as e:
-                    sweetify.error(request, f'El insumo no se pudo crear: {str(e)}') 
+                    sweetify.error(request, f'El platillo no se pudo crear: {str(e)}') 
         else:
             form = InventarioForm()
     else:
