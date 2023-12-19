@@ -22,10 +22,10 @@ urlpatterns = [
 
     #Bodega
     path('Inventario/', ver_inventario,name='ver_inventario'),
-    path('actualizar_cantidad/<int:id>/',actualizar_cantidad, name='actualizar_cantidad'),
+    path('actualizar_cantidad/<int:id>',actualizar_cantidad, name='actualizar_cantidad'),
     path('Inventario/crear/', crear_inventario,name='crear_inventario'),
-    path('Inventario/delete/<int:id>/', inventario_delete,name='inventario_Delete'),
-    path('Inventario/actualizar/<int:id>/',editar_bodega,name='editarInventario'),
+    path('Inventario/delete/<int:id>', inventario_delete,name='inventario_Delete'),
+    path('Inventario/actualizar/<int:id>',editar_bodega,name='editarInventario'),
     
     #Ventas
     path('Ventas/crear/',crear_ventas, name='crear_ventas'),
