@@ -474,12 +474,12 @@ def ventas_detalle(request):
         total += detalles_agrupados_producto['total_precio_impuesto']
         total_precio += detalles_agrupados_producto['total_precio_impuesto']
         total_adicional += detalles_agrupados_producto['total_por_impuesto']
-        
+    
     data = {
         'ventas': detalles_ventas, 'fechaHoy': fecha_actual_hoy, 'detalles_hoy': detalles_hoy,
         'nombre_producto': nombre_producto, 'impuesto': impuesto, 'detalles_agrupados': detalles_agrupados,
         'total': total, 'fechaHoy':fecha_actual, 'total_precio': total_precio, 'total_adicional': total_adicional,
-        'TotalDetalles': TotalDetalles
+        'TotalDetalles': total_precio
     }
 
     return render(request, 'Ventas/detallesVentas.html', data)
