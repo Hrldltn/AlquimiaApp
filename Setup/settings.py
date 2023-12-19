@@ -100,14 +100,15 @@ WSGI_APPLICATION = 'Setup.wsgi.application'
 
 
 DATABASES = {
-     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dbalquimia',
-        'USER':'root',
-        'PASSWORD':''
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'alquimiadb',
+        'USER': 'alquimiadb_user',
+        'PASSWORD': '0RNTXnLredN7fLUBtiDcaJSz8CRZ1RI1',
+        'HOST': 'dpg-cldvsimf27hc738ovcg0-a.oregon-postgres.render.com',  
+        'PORT': '5432',  
     }
 }
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
