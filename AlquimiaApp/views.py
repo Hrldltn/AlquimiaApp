@@ -1,6 +1,6 @@
-
 from datetime import datetime, date, time
 from decimal import Decimal
+import json
 from django.db.models import Q
 from django.db.models import Sum, F, ExpressionWrapper, fields
 from django.shortcuts import get_object_or_404, render, redirect
@@ -14,6 +14,8 @@ from .forms import CalendarioForm, CustomUserCreationForm, InventarioForm
 from AlquimiaApp.models import Calendario, DetallesVenta, Inventario, User, Venta 
 import sweetify
 from datetime import date
+
+from AlquimiaApp import models
 
 fecha_actual = date.today()
 
@@ -493,3 +495,80 @@ def ventas_detalle_delete (request,id):
     detalles.delete()
     sweetify.success(request, f'El registró se elimino correctamente')
     return redirect("../../../Ventas/detalle/")
+
+
+#Estadistica
+import matplotlib.pyplot as plt
+from django.db.models import Count
+from django.db.models.functions import TruncMonth
+
+class EstadisticaView(View):
+    template_name = 'Estadistica/Estadistica.html'
+    def get(self, request,event_id=None):
+        if request.user.is_authenticated:
+            date = Calendario.objects.all()
+            registros_Hoy = date.filter(start_time__date=fecha_actual)
+            insumo = Inventario.objects.all()
+
+            form = CalendarioForm()
+            registros_Totales = date.count()
+            registros_TotalesHoy = registros_Hoy.count()
+            
+
+            
+            # Obtener ventas totales por mes
+            ventas_por_mes = Venta.objects.filter(fecha__year=fecha_actual.year).values('fecha__month').annotate(ventas_totales=Sum('Total'))
+
+            # Convertir resultados a formato JSON
+            ventas_por_mes_json = json.dumps(list(ventas_por_mes), default=str)
+            
+            # Obtener platillos más vendidos
+            platillos_mas_vendidos = DetallesVenta.objects.values('calendario__productos__nombre').annotate(cantidad_vendida=Sum('venta__cantidad_vendida')).order_by('-cantidad_vendida')[:5]
+            # Obtener platillo más vendido por mes
+
+            porcionesUtilizadasTotal = sum(registro.Porciones for registro in registros_Hoy if registro.Porciones is not None)
+            porcionesTotalBodega = sum(item.porciones_disponibles for item in insumo)
+
+            cantidad_usuarios_activos = User.objects.filter(is_active=True).count()
+            cantidad_usuarios_inactivos = User.objects.filter(is_active=False).count()
+            cantidad_usuarios_totales = User.objects.count()
+
+            total_ventas_hoy = Venta.objects.filter(fecha__date=fecha_actual).aggregate(Sum('Total'))['Total__sum'] or 0
+            total_ventas_totales = Venta.objects.aggregate(Sum('Total'))['Total__sum'] or 0
+       
+            producto_PorPrecio = insumo.values('nombre').annotate(porciones_disponibles=insumo.values('porciones_disponibles'))
+            producto_PorPrecio = insumo.values('nombre', 'porciones_disponibles')
+            data = list(producto_PorPrecio)
+            event_data = {}
+            if event_id:
+                event_data['event_id'] = event_id
+                
+            context = {
+                'date': date,
+                'form': form,
+                'title': 'Registrar evento',
+                'button': 'Registrar',
+                'fechaHoy': fecha_actual,
+                'porcionesTotal': porcionesTotalBodega,
+                'porcionesUtilizadasTotal': porcionesUtilizadasTotal,
+                'registrosTotales': registros_Totales,
+                'registrosHoy': registros_TotalesHoy,
+                'productoPorPrecio': data,
+                'event_id': event_id,
+                'cantidad_usuarios_activos': cantidad_usuarios_activos,  # Incluir el conteo de usuarios activos en el contexto
+                'cantidad_usuarios_inactivos': cantidad_usuarios_inactivos, 
+                'cantidad_usuarios_totales': cantidad_usuarios_totales,
+                'total_ventas_hoy': total_ventas_hoy,
+                'ventas_por_mes': ventas_por_mes_json,
+                'total_ventas_totales': total_ventas_totales,
+                'platillos_mas_vendidos': platillos_mas_vendidos,  # Incluir los platillos más vendidos en el contexto
+
+            }
+
+            return render(request, self.template_name, context)
+        else:
+            return redirect('/')
+        
+
+
+

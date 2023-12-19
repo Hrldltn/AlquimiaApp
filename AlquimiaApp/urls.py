@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import  (
-    OrganizacionView, crear_usuario, ver_inventario,ver_usuario,editar_usuario,
+    OrganizacionView,EstadisticaView, crear_usuario, ver_inventario,ver_usuario,editar_usuario,
     UserDelete,Login,SignOut,crear_inventario,organizacion_delete,crear_ventas,
     ventas_detalles,actualizar_cantidad,ventas_delete,ventas_detalle,cantidad_ventas,inventario_delete,ventas_detalle_delete,
     editar_bodega,configuracion_user
@@ -36,4 +36,9 @@ urlpatterns = [
     path('Ventas/detalles/',ventas_detalles, name='ventas_detalles'),
     path('Ventas/detalle/',ventas_detalle, name='ventas_detalle'),
     path('Ventas/detalle/delete/<int:id>',ventas_detalle_delete, name='ventas_detalle_delete'),
+    
+    
+    # ORGANIZACIÓN
+    path('Estadistica/', EstadisticaView.as_view(), name='estadistica_view'),
+    
 ]

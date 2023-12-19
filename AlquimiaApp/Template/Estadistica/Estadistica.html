@@ -1,0 +1,200 @@
+{% extends 'base/Sidebar.html' %}
+{% load crispy_forms_tags %}
+
+    <!-- Widgets  -->
+    <div class="row ">
+
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-2">
+                            <i class="fa fa-product-hunt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count"></span></div>
+                                <div class="stat-heading">Categoria</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-4">
+                            <i class="fa fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count"></span></div>
+                                <div class="stat-heading">Usuarios</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Widgets -->
+    
+    <div class="clearfix"></div>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+
+    <script >
+        let started = ()=>{
+            console.log("puto ")
+            Highcharts.chart('container', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Reporte de ventas del año 2023',
+    },
+    subtitle: {
+        text:
+            'Reporte de columnas' ,
+        align: 'left'
+    },
+    xAxis: {
+        categories: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+        crosshair: true,
+        accessibility: {
+            description: 'Countries'
+        }
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Valores $'
+        }
+    },
+    tooltip: {
+        valueSuffix: '$'
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [
+        {
+            name: 'Porcentaje de Venta ',
+            showInLegend: false,
+            colorByPoint: true,
+            data:[{
+                name: 'venta 1',
+                    y: 100000
+            },{
+                name:'venta 2 ',
+                y:150000
+            },{
+                name:'venta 3 ',
+                y:1230000
+            },
+            {
+                name:'venta 4',
+                y:1504230
+            }]
+        }]
+});
+        }
+    
+    </script>
+    
+    <!-- GRAFICO DE TORTA-->
+    <script>
+        let pie = ()=>{
+            console.log("putopie")
+            Highcharts.chart('container-pie', {
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: 'Los Platillo del Mes'
+        },
+        tooltip: {
+            valueSuffix: '%'
+        },
+        subtitle: [],
+        plotOptions: {
+            series: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: [{
+                    enabled: true,
+                    distance: 20
+                }, {
+                    enabled: true,
+                    distance: -40,
+                    format: '{point.percentage:.1f}%',
+                    style: {
+                        fontSize: '1.2em',
+                        textOutline: 'none',
+                        opacity: 0.7
+                    },
+                    filter: {
+                        operator: '>',
+                        property: 'percentage',
+                        value: 10
+                    }
+                }]
+            }
+        },
+        series: [
+            {
+                name: 'Porciones Disponibles',
+              colorByPoint: true,
+              data: [{
+                name:'Lasaña',
+                y:10
+              },{
+                name:'Fideo con salsa',
+                y:19
+              },{
+                name:'Fideo al pesto',
+                y:6
+              },{
+                name:'Puré con milanesa',
+                y:19
+              }]
+            }
+        ]
+    });
+    }
+
+    </script>
+    
+    <div class="orders">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="box-title">Reporte</h4>
+                    </div>
+                    <div class="card-body--">
+                        <div class="table-stats order-table ov-h">
+                            <table class="table ">
+                                <div id="container"> <script>started()</script></div>
+                                <div id="container-pie"> <script>  pie()</script></div>
+                            </table>
+                        </div> <!-- /.table-stats -->
+                    </div>
+                </div> <!-- /.card -->
+            </div>  <!-- /.col-lg-8 -->
+
+            
+        </div>
+    </div>
+
+
