@@ -498,10 +498,9 @@ def ventas_detalle_delete (request,id):
     return redirect("../../../Ventas/detalle/")
 
 
-#Estadistica
-import matplotlib.pyplot as plt
-from django.db.models import Count
-from django.db.models.functions import TruncMonth
+
+from django.db.models import Sum
+import json
 
 class EstadisticaView(View):
     template_name = 'Estadistica/Estadistica.html'
@@ -514,9 +513,15 @@ class EstadisticaView(View):
             form = CalendarioForm()
             registros_Totales = date.count()
             registros_TotalesHoy = registros_Hoy.count()
-            
 
             
+            meses_unicos = Venta.objects.dates('fecha', 'month').distinct()
+
+            # Obtener ventas por día
+            ventas_por_dia = Venta.objects.filter(fecha__year=fecha_actual.year, fecha__month=fecha_actual.month).values('fecha').annotate(ventas_totales=Sum('Total'))
+            # Convertir resultados a formato JSON
+            ventas_por_dia_json = json.dumps(list(ventas_por_dia), default=str)
+
             # Obtener ventas totales por mes
             ventas_por_mes = Venta.objects.filter(fecha__year=fecha_actual.year).values('fecha__month').annotate(ventas_totales=Sum('Total'))
 
@@ -562,14 +567,93 @@ class EstadisticaView(View):
                 'total_ventas_hoy': total_ventas_hoy,
                 'ventas_por_mes': ventas_por_mes_json,
                 'total_ventas_totales': total_ventas_totales,
-                'platillos_mas_vendidos': platillos_mas_vendidos,  # Incluir los platillos más vendidos en el contexto
+                'platillos_mas_vendidos': platillos_mas_vendidos,
+                'ventas_por_dia': ventas_por_dia_json,
+                'meses_unicos': meses_unicos,
+                'mes_actual': fecha_actual.strftime('%B'),
+
+
 
             }
+                # Obtener los valores seleccionados del formulario
+            mes1 = request.GET.get('mes1')
+            mes2 = request.GET.get('mes2')
+
+            # Realizar la comparación de ventas si ambos meses están seleccionados
+            if mes1 and mes2:
+                ventas_mes1 = Venta.objects.filter(fecha__month=mes1).aggregate(Sum('Total'))['Total__sum'] or 0
+                ventas_mes2 = Venta.objects.filter(fecha__month=mes2).aggregate(Sum('Total'))['Total__sum'] or 0
+
+                context['comparacion_ventas'] = f"La Ventas del Mes {mes1} Es:  ${ventas_mes1} Y La Ventas en Mes {mes2} Es: ${ventas_mes2}"
+                context['diferencia_ventas'] = ventas_mes2 - ventas_mes1
+# Obtener el mes seleccionado desde la consulta GET
+            mes_seleccionado = request.GET.get('mes')
+
+            # Inicializar platillos_mes_vendidos con una lista vacía
+            platillos_mes_vendidos = []
+
+            # Verificar si mes_seleccionado no es None antes de intentar split
+            if mes_seleccionado:
+                # Obtener platillos más vendidos del mes seleccionado
+                platillos_mes_vendidos = DetallesVenta.objects.filter(
+                    venta__fecha__year=fecha_actual.year,
+                    venta__fecha__month=mes_seleccionado.split('-')[1],  # Obtener el número del mes
+                ).values('calendario__productos__nombre').annotate(cantidad_vendida=Sum('venta__cantidad_vendida')).order_by('-cantidad_vendida')[:5]
+
+            # Agregar el mes seleccionado y los platillos al contexto
+            context['mes_seleccionado'] = mes_seleccionado if mes_seleccionado else None
+            context['platillos_mes_vendidos'] = platillos_mes_vendidos
+
 
             return render(request, self.template_name, context)
         else:
             return redirect('/')
-        
+
+
+
+from django.shortcuts import render
+from .models import Venta, Calendario
+from django.db.models import Sum
+from django.db.models.functions import ExtractMonth
+from django.db.models import Count
+
+def ventas_por_mes(request):
+    template_name = 'Estadistica/Estadistica.html'
+    ventas_por_mes = (
+        Venta.objects
+        .annotate(mes=ExtractMonth('fecha'))
+        .values('mes')
+        .annotate(ventas_totales=Sum('cantidad_vendida'))
+        .order_by('mes')
+    )
+
+    # Obtén el platillo más vendido del mes actual
+    mes_actual = request.GET.get('mes', None)
+    platillo_mas_vendido = ''
+    if mes_actual:
+        platillo_mas_vendido = obtener_platillo_mas_vendido(int(mes_actual))
+
+    # Pasa los datos al contexto
+    context = {
+        'ventas_por_mes': ventas_por_mes,
+        'platillo_mas_vendido': platillo_mas_vendido,
+    }
+
+    # Renderiza el template
+    return render(request, template_name, context)
+
+def obtener_platillo_mas_vendido(mes):
+    # Obtén el platillo más vendido del mes
+    platillo_mas_vendido = (
+        Calendario.objects
+        .filter(start_time__month=mes, realizada='SI')  
+        .values('productos__nombre')
+        .annotate(cantidad_vendida=Sum('Porciones'))
+        .order_by('-cantidad_vendida')
+        .first()
+    )
+
+    return platillo_mas_vendido['productos__nombre'] if platillo_mas_vendido else 'No disponible'
 
 
 
