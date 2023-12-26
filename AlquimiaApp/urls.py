@@ -40,6 +40,7 @@ urlpatterns = [
     
     # ORGANIZACIÓN
     path('Estadistica/', EstadisticaView.as_view(), name='estadistica_view'),
+    path('ruta_de_tu_vista/', EstadisticaView.as_view(), name='tu_vista_estadistica'),
     
     
 ]
