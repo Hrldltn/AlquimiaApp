@@ -45,11 +45,69 @@
                     <div class="row justify-content-evenly px-5 ">
                         <div class="shadow p-5 bg-light align-content-center  gap-2 justify-content-between row">
                             <p class="py-3">Información de bodega y registros</p>
-                            
-                     
-                            
+                            <div class="card shadow p-0 col-md-12 col-xl-5 mx-4">
+                                <div class="card-header d-flex bg-primary flex-row align-items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="mx-3 text-white bi bi-record-circle" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                    </svg>
+                                    <h6 class="card-title pt-2 text-white">Platillos</h6>
+                                </div>
+                                <div class="card-body bg-light pt-3">
+                                    <div class="d-flex flex-row align-items-center  mt-2 px-2">
+                                        <h6 class="card-title text-secondary pb-1">Disponibles en bodega:</h6>
+                                        <p class="card-text  fw-bold px-2 "> {{porcionesTotal}}</p>
+                                        <p class="spinner-grow p-0 mx-1 pb-1 {% if porcionesTotal <= 2 %} bg-danger {% elif porcionesTotal > 2 %} bg-success{% endif %}"></p>
+                                    </div><hr>
+                                    <div class="d-flex flex-row align-items-center mb-3 px-2">
+                                        <h6 class="card-title text-secondary mb-1">Platillos consumidos hoy:</h6>
+                                        <p class="card-text  fw-bold px-2 pb-2"> {{porcionesUtilizadasTotal|floatformat:0}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        <br>
+                            <div class="card shadow p-0 col-md-12 col-xl-5 mx-4">
+                                <div class="card-header bg-primary d-flex flex-row align-items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="mx-3 text-white bi bi-card-checklist" viewBox="0 0 16 16">
+                                        <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                                        <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+                                    </svg>
+                                    <h6 class="card-title pt-2 text-white">Ventas</h6>
+                                </div>
+                                <div class="card-body ">
+                                    <div class="d-flex flex-row  align-items-center  mt-2 px-2">
+                                        <h6 class="card-title text-secondary mb-1">Total:</h6>
+                                        <p class="card-text  fw-bold px-2 mb-0">$ {{ total_ventas_totales|floatformat:0  }}</p>
+                                        <p class="spinner-grow p-0 mx-1 {% if registrosHoy == 0 %} bg-danger {% elif registrosHoy > 0 %} bg-success{% endif %}"></p>
+                                    </div><hr>
+                                    <div class="d-flex flex-row align-content-center align-items-center   px-2">
+                                        <h6 class="card-title text-secondary mb-1">Total hoy:</h6>
+                                        <p class="card-text  fw-bold px-2 mb-0"> ${{ total_ventas_hoy|floatformat:0 }}</p>
+                                    </div>
+                                </div>
+                            </div>
                             <br>
-                      
+                            <div class="card shadow p-0 col-md-12 col-xl-5 mx-4 center" >
+                                <div class="card-header bg-primary d-flex flex-row align-items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="mx-3 text-white bi bi-card-checklist" viewBox="0 0 16 16">
+                                        <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>                                    </svg>
+                                    <h6 class="card-title pt-2 text-white">Usuarios Activos</h6>
+                                </div>
+                            <div class="card-body ">
+                                <div class="d-flex flex-row  align-items-center  mt-2 px-2">
+                                    <h6 class="card-title text-secondary mb-1">Activos:</h6>
+                                    <p class="card-text  fw-bold px-2 mb-0"> {{ cantidad_usuarios_activos }}</p>
+                                    <p class="spinner-grow p-0 mx-1 {% if registrosHoy == 0 %} bg-danger {% elif registrosHoy > 0 %} bg-success{% endif %}"></p>
+                                </div><hr>
+                                <div class="d-flex flex-row align-content-center align-items-center   px-2">
+                                    <h6 class="card-title text-secondary mb-1">Inactivos:</h6>
+                                    <p class="card-text  fw-bold px-2 mb-0">  {{ cantidad_usuarios_inactivos }}</p>
+                                </div><hr>
+                                <div class="d-flex flex-row align-content-center align-items-center  mb-2 px-2">
+                                    <h6 class="card-title text-secondary mb-1">Registros totales:</h6>
+                                    <p class="card-text  fw-bolder px-2 pb-2">{{ cantidad_usuarios_totales }}</p>
+                                </div>
+                            </div>
                         </div>
 
                         <section>
@@ -58,7 +116,7 @@
                                 <div class="card-header bg-primary d-flex flex-row align-items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="mx-3 text-white bi bi-card-checklist" viewBox="0 0 16 16">
                                         <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>                                    </svg>
-                                    <h6 class="card-title pt-2 text-white">Platillos vendidos</h6>
+                                    <h6 class="card-title pt-2 text-white">Platillos Más vendidos del 2023</h6>
                                 </div>
                                     <table class="table table-bordered border-primary">
                                         <thead>
@@ -102,7 +160,7 @@
                                 
                             </div>
                         </div>
-                       
+                        
                             <!-- /.card-header -->
                             <div class="card shadow p-0 d-flex flex-row mt-5  my-3 ">
                                 <div class="card-header bg-primary d-flex flex-column align-items-center justify-content-center">
@@ -112,18 +170,106 @@
                                     <h6 class="card-title pt-1 text-white">Gráfico informativo</h6>
                                 </div>
                                 <div class="card-body d-flex justify-content-center">
+                                  <p>Valor $</p>
                                     <div class="col-md-5">
-                                        <canvas id="ventasPorMesChart"></canvas>
+                                        <canvas id="ventasPorMesChart"width="400" height="400"></canvas>
+                                        <p class="card-body d-flex justify-content-center">Fechas</p>
                                         <hr>
                                         <h6 class="card-title text-center mt-3">Ventas Por Mes</h6>
                                         <hr>
+                                        
                                     </div>
-                                    
+                       
                                 </div>
                                
+                              </div>
+                              <div  class="alert alert-primary">
+                                <h3 class="card-body d-flex justify-content-center">Platillos más vendidos del Mes</h3>
+                                <form id="selectMonthForm" method="get" action="">
+                                  <label for="mes">Selecciona un mes:</label>
+                                  <br>
+                                  <select class="form-select"id="mes" name="mes">
+                                      {% for mes in meses_unicos %}
+                                          <option value="{{ mes|date:'Y-m' }}">{{ mes|date:'F Y' }}</option>
+                                      {% endfor %}
+                                  </select>
+                                  <br>
+                                  <button class="btn btn-dark"type="submit">Ver platillos más vendidos</button>
+                                </form>
+                                </div>
+                                
+                                <div class="alert alert-success" role="alert">
+                                {% if platillos_mes_vendidos %}
+                                  <h2>Platillos más vendidos en {{ mes_seleccionado }}</h2>
+                                  <ul>
+                                      {% for platillo in platillos_mes_vendidos %}
+                                          <li>{{ platillo.calendario__productos__nombre }} - Cantidad vendida: {{ platillo.cantidad_vendida }}</li>
+                                      {% endfor %}
+                                  </ul>
+                                {% endif %}
+                              </div>
+                              <div >
+                                <div class="alert alert-primary" role="alert">
+                                  <h3 class="card-body d-flex justify-content-center">Comparación de Ventas por Meses </h3>
+                                  <form method="GET" action="{% url 'tu_vista_estadistica' %}">
+                                      <label for="mes1">Seleccione el primer mes:</label>
+                                      <select class="form-select" aria-label="Default select example" name="mes1" id="mes1">
+                                          {% for mes in meses_unicos %}
+                                              <option value="{{ mes|date:'m' }}">{{ mes|date:'F' }}</option>
+                                          {% endfor %}
+                                      </select>
+                                      <br>
+                                      <label for="mes2">Seleccione el segundo mes:</label>
+                                      <select class="form-select" aria-label="Default select example" name="mes2" id="mes2">
+                                          <br>
+                                          {% for mes in meses_unicos %}
+                                              <option value="{{ mes|date:'m' }}">{{ mes|date:'F' }}</option>
+                                          {% endfor %}
+                                      </select>
+                                      <br>
+                                      <button type="submit" id="btnCompararVentas" class="btn btn-dark">Comparar Ventas</button>
+                                  </form>
+                              </div>
+                              </div>
+                              <div class="alert alert-success" role="alert">
+                                <div id="comparacion-ventas">
+                                {% if comparacion_ventas %}
+                                  <p>{{ comparacion_ventas }}</p>
+                                {% endif %}
+                                {% if diferencia_ventas is not None %}
+                                  <p>Diferencia de Ventas: ${{ diferencia_ventas }}</p>
+                                {% endif %}
+                              </div></div>
+                            
+                         
+
+                    <!-- /.card-header -->
+                    <div class="card shadow p-0 d-flex flex-row mt-5  my-3 ">
+                        <div class="card-header bg-primary d-flex flex-column align-items-center justify-content-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="text-white mb-2 bi bi-graph-up" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M0 0h1v15h15v1H0zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"/>
+                              </svg>
+                            <h6 class="card-title pt-1 text-white">Gráfico informativo</h6>
+                        </div>
+                        <div class="card-body d-flex justify-content-center">
+                          <p>Valor $</p>
+                          <input class="btn btn-primary mt-3" type="submit" value="Buscar" id="verMasButton"style="width:150px;">
+                            <div class="col-md-5">
+                                <canvas id="ventasPorDiaChart"width="600" height="600"></canvas>
+                                <p class="card-body d-flex justify-content-center">Fechas</p>
+                                <hr>
+                                <h6 class="card-title text-center mt-3">Ventas Por Dia</h6>
+                                <hr>
                                 
                             </div>
+                          </div>
+
                         </div>
+                      </div>
+                  </div>
+                        
+                    </div>
+                </div>
                         
         </main>
             </section>
@@ -165,6 +311,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.9/index.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.9/index.global.js"></script>
+<script src="https://unpkg.com/html2pdf.js"></script>
 <script>
     const chartone = document.getElementById('myChart');
     var productoPorPrecioData = {{ productoPorPrecio|safe }};
@@ -198,71 +345,191 @@
 </script>
 
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // Obtén los datos de ventas por mes desde el contexto de Django
-      var ventasPorMesData = {{ ventas_por_mes|safe }};
 
-      // Prepara los datos para el gráfico
-      var meses = ventasPorMesData.map(function (venta) {
-        return venta.fecha__month;
+
+
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var ventasPorMesData = {{ ventas_por_mes|safe }};
+    var nombresMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    
+    var meses = [];
+    var ventasTotales = [];
+
+    for (var i = 1; i <= 12; i++) {
+      var ventaMes = ventasPorMesData.find(function (venta) {
+        return venta.fecha__month === i;
       });
 
-      var ventasTotales = ventasPorMesData.map(function (venta) {
-        return venta.ventas_totales;
-      });
+      meses.push(nombresMeses[i - 1]);
+      ventasTotales.push(ventaMes ? ventaMes.ventas_totales : 0);
+    }
 
-      // Configura y dibuja el gráfico con Chart.js
-      var ctx = document.getElementById('ventasPorMesChart').getContext('2d');
-      var ventasPorMesChart = new Chart(ctx, {
+    var ctx = document.getElementById('ventasPorMesChart').getContext('2d');
+    var ventasPorMesChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: meses,
+        datasets: [{
+          label: 'Ventas por Mes del 2023 $',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1,
+          data: ventasTotales,
+        }],
+      },
+      options: {
+        scales: {
+          y: {
+            
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    function filtrarPorMes() {
+      var mesSeleccionado = parseInt(document.getElementById('mesFiltrar').value, 10);
+      console.log("Mes seleccionado:", mesSeleccionado);
+
+      var datosFiltrados;
+
+      if (mesSeleccionado === 0) {
+        // Mostrar todos los meses
+        datosFiltrados = ventasPorMesData;
+      } else {
+        // Filtrar por mes seleccionado
+        datosFiltrados = ventasPorMesData.filter(function (venta) {
+          return venta.fecha__month === mesSeleccionado;
+        });
+      }
+
+      console.log("Datos filtrados:", datosFiltrados);
+
+      // Actualizar el gráfico con los datos filtrados
+      actualizarGrafico(ventasPorMesChart, datosFiltrados);
+    }
+
+    function actualizarGrafico(chart, datos) {
+      var ventasMesesFiltrados = [];
+      
+      for (var i = 1; i <= 12; i++) {
+        var ventaMes = datos.find(function (venta) {
+          return venta.fecha__month === i;
+        });
+
+        ventasMesesFiltrados.push(ventaMes ? ventaMes.ventas_totales : 0);
+      }
+
+      chart.data.datasets[0].data = ventasMesesFiltrados;
+      chart.update();
+    }
+  });
+</script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var coloresPaleta = [
+      "rgba(75, 192, 192, 0.2)",
+      "rgba(255, 99, 132, 0.2)",
+      "rgba(255, 205, 86, 0.2)",
+      "rgba(54, 162, 235, 0.2)",
+      "rgba(153, 102, 255, 0.2)",
+      "rgba(255, 159, 64, 0.2)",
+      "rgba(255, 0, 0, 0.2)",
+      "rgba(0, 255, 0, 0.2)",
+      "rgba(0, 0, 255, 0.2)",
+      "rgba(255, 255, 0, 0.2)"
+    ];
+
+    var ventasPorDiaData = {{ ventas_por_dia|safe }};
+    var ventasMostradas = obtenerUltimosDatos(ventasPorDiaData, 6);
+
+    function obtenerUltimosDatos(data, n) {
+      return data.slice(-n);
+    }
+
+    function prepararDatosGrafico(data) {
+      return {
+        labels: data.map(function (venta) {
+          return new Date(venta.fecha).toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        }),
+        datasets: [{
+          label: 'Ventas por Día',
+          backgroundColor: coloresPaleta,
+          borderColor: coloresPaleta,
+          borderWidth: 1,
+          data: data.map(function (venta) {
+            return venta.ventas_totales;
+          }),
+        }],
+      };
+    }
+
+    var ctx = document.getElementById('ventasPorDiaChart').getContext('2d');
+    var ventasPorDiaChart;
+
+    function inicializarGrafico(data) {
+      var datosGrafico = prepararDatosGrafico(data);
+      ventasPorDiaChart = new Chart(ctx, {
         type: 'bar',
-        data: {
-          labels: meses,
-          datasets: [{
-            label: 'Ventas por Mes',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1,
-            data: ventasTotales,
-          }],
-        },
+        data: datosGrafico,
         options: {
           scales: {
             y: {
               beginAtZero: true
             }
-          }
+          },
+          plugins: {
+            legend: {
+              display: true,
+              position: 'bottom',
+            },
+            title: {
+              display: true,
+              text: 'Ventas por Día',
+            },
+          },
         }
       });
+    }
+
+    var verMasButton = document.getElementById('verMasButton');
+    if (ventasPorDiaData.length <= ventasMostradas.length) {
+      verMasButton.style.display = 'none';
+    }
+
+    verMasButton.addEventListener('click', function () {
+      var nuevasVentas = ventasPorDiaData.filter(function (venta) {
+        return !ventasMostradas.some(function (mostrada) {
+          return venta.fecha === mostrada.fecha;
+        });
+      });
+
+      ventasMostradas = obtenerUltimosDatos(ventasMostradas.concat(nuevasVentas));
+
+      ventasPorDiaChart.destroy();
+      inicializarGrafico(ventasMostradas);
+
+      if (ventasPorDiaData.length <= ventasMostradas.length) {
+        verMasButton.style.display = 'none';
+      }
     });
-  </script>
+
+    inicializarGrafico(ventasMostradas);
+  });
+</script>
 
 
-                                
-    </section>
-    <script>
-        function eliminarUser(id) {
-            Swal.fire({
-                "title": "¿Estas Seguro? ",
-                "text": "Eliminar esta información no se puede deshacer",
-                "icon": "question",
-                "showCancelButton": true,
-                "cancelButtonText": "Cancelar",
-                "confirmButtonText": "Eliminar",
-                "reverseButtons": true,
-                "confirmButtonColor": "#dc3545"
-            })
-                .then(function (result) {
-                    if (result.isConfirmed) {
-                        window.location.href = "/UserDelete/" + id
-                    }
-                })
-        }
-    </script>
         
     {% endblock %}
 
 </html>
+
 
 
 
